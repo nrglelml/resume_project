@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EducationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,4 +36,7 @@ Route::get('/register', function (){
 
 Route::prefix('admin')->group(function (){
    Route::get('/',[AdminController::class , 'index'])->name('admin.index');
+   Route::get('/dashboard',[AdminController::class , 'dashboard'])->name('admin.dashboard');
+   Route::get('/education',[EducationController::class , 'education'])->name('admin.education');
+
 });

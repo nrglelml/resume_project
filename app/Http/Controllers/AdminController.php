@@ -12,6 +12,10 @@ class AdminController extends Controller
     }
 
     public function index(){
-        dd(' Geldi');
+       return view('layouts.admin');
     }
+    public function dashboard(){
+        return view('admin.dashboard');
+    }
+
 }
