@@ -36,7 +36,7 @@ Route::get('/register', function (){
 
 Route::prefix('admin')->group(function (){
    Route::get('/',[AdminController::class , 'index'])->name('admin.index');
-   Route::get('/dashboard',[AdminController::class , 'dashboard'])->name('admin.dashboard');
-   Route::get('/education',[EducationController::class , 'education'])->name('admin.education');
+   Route::get('/education-list',[EducationController::class , 'list'])->name('admin.education-list');
+   Route::get('/education-add',[EducationController::class , 'addShow'])->name('admin.education-add');
 
 });

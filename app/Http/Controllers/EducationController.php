@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
-  public function education(){
+  public function list(){
       return view('admin.education');
+  }
+  public function addShow(){
+      return view('admin.education-add');
   }
 }

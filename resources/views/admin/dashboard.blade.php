@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Admin Paneli
+    Admin Panel
 @endsection
     @section('content')
             <div class="content-wrapper">

@@ -80,33 +80,18 @@
                 <span class="nav-link">Navigation</span>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('admin.dashboard')}}">
+                <a class="nav-link" href="{{route('admin.index')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
                     <span class="menu-title" >Admin Paneli</span>
                 </a>
             </li>
+
             <li class="nav-item menu-items">
-                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" href="{{route('admin.education-list')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
-              </span>
-                    <span class="menu-title">Eğitim Bilgileri</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{route('admin.education')}}">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
               </span>
                     <span class="menu-title">Eğitim Bilgileri</span>
                 </a>
@@ -365,7 +350,7 @@
             </div>
             <!-- content-wrapper ends -->
             <!-- partial:../../partials/_footer.html -->
-            <footer class="footer">
+         <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
                     <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
                     <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
