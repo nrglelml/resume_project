@@ -3,6 +3,7 @@
     Yeni Eğitim Bilgisi Ekle
 @endsection
 @section('content')
+
     <div class="content-wrapper">
         <div class="page-header">
             <h3 class="page-title"> Yeni Eğitim Bilgisi Ekleme </h3>
@@ -18,36 +19,97 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <form class="forms-sample" action="" method="POST" >
+                        <form class="forms-sample" action="" method="POST" id="createEducationForm">
                             @csrf
                             <div class="form-group">
-                                <label for="education_date">Eğitim Tarihi</label>
-                                <input type="text" class="form-control"name="education-date" id="education_date" placeholder="Eğitim Tarihi">
+                                <label for="ed_date">Eğitim Tarihi</label>
+                                <input type="text" class="form-control"name="ed_date" id="ed_date"  placeholder="Eğitim Tarihi">
+                                <small>Örneğin 2015 - 2020</small>
+                                @error('ed_date')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="university">Üniversite</label>
-                                <input type="email" class="form-control" name="university" id="university" placeholder="Üniversite">
+                                <input type="text" class="form-control" name="university" id="university" placeholder="Üniversite">
+                                @error('university')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="department">Bölüm</label>
-                                <input type="password" class="form-control"  name="department" id="department" placeholder="Bölüm">
+                                <input type="text" class="form-control"  name="department" id="department" placeholder="Bölüm">
+                                @error('department')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Açıklama</label>
-                                <input type="password" class="form-control" name="description" id="description" placeholder="Açıklama">
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Açıklama">
                             </div>
-                           <div class="form-group">
-                               <div class="form-check form-check-success">
-                                   <label class="form-check-label" for="status">
-                                       <input type="checkbox"  name="status" id="status" class="form-check-input" > Eğitim Bilgileri Alanında Gösterilme Durumu </label>
-                               </div>
-                           </div>
-                            <button type="button" class="btn btn-primary me-2">Ekle</button>
-                            <button class="btn btn-dark">İptal</button>
+                            <div class="form-group">
+                                <div class="form-check form-check-success">
+                                    <label class="checkbox-button">
+                                        <input type="checkbox" id="status" name="status">
+                                        <span class="checkmark"></span>
+                                        Eğitim Bilgileri Alanında Gösterilme Durumu
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary me-2" id="createbutton">Ekle</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div
+    </div>
+
+@endsection
+@section('js')
+
+    <script>
+        $('#createbutton').click(function (e)
+
+       {
+        /*   e.preventDefault();
+          let education_date = document.querySelector('#education_date').value;
+          let university = document.querySelector('#university').value;
+          let department = document.querySelector('#department').value;
+          if ( education_date.trim() == ''){
+
+              Swal.fire({
+                  icon: 'info',
+                  title: 'Uyarı!',
+                  text: 'Email alanı boş kalamaz!',
+                  confirmButtonText: 'Tamam',
+
+              })
+          }
+          else if(university.trim() == ''){
+
+              Swal.fire({
+                  icon: 'info',
+                  title: 'Uyarı!',
+                  text: 'Gecerli bir email adresi yazın!',
+                  confirmButtonText: 'Tamam',
+
+              })
+          }
+          else if (department.trim() == ''){
+              Swal.fire({
+                  icon: 'info',
+                  title: 'Uyarı!',
+                  text: 'Parola alanı boş kalamaz!',
+                  confirmButtonText: 'Tamam',
+
+              })
+          }
+          else {
+              $('#createEducationForm').submit();
+          }*/
+      });
+</script>
 @endsection

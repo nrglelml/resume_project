@@ -38,5 +38,8 @@ Route::prefix('admin')->group(function (){
    Route::get('/',[AdminController::class , 'index'])->name('admin.index');
    Route::get('/education-list',[EducationController::class , 'list'])->name('admin.education-list');
    Route::get('/education-add',[EducationController::class , 'addShow'])->name('admin.education-add');
+   Route::post('/education-add',[EducationController::class , 'add'])->name('add');
+   Route::post('/education-change-status',[EducationController::class,'changeStatus'])->name('admin.education-changeStatus');
+   Route::post('/education-delete',[EducationController::class,'delete'])->name('admin.education-delete');
 
 });

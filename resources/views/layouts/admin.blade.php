@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('title')</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
+    <link rel="stylesheet" href="{{asset('assets/sweet-alert/sweetalert2.css')}}"/>
 </head>
 <body>
 <div class="container-scroller">
@@ -374,8 +376,12 @@
 <script src="{{asset('assets/js/misc.js')}}"></script>
 <script src="{{asset('assets/js/settings.js')}}"></script>
 <script src="{{asset('assets/js/todolist.js')}}"></script>
+<script src="{{asset('assets/sweet-alert/sweetalert2.all.min.js')}}"></script>
+@include('sweetalert::alert')
+@yield('js')
 <!-- endinject -->
 <!-- Custom js for this page -->
 <!-- End custom js for this page -->
 </body>
 </html>
+
