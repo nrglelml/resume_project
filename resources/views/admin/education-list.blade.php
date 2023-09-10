@@ -51,13 +51,13 @@
                                         <td>{{$item->description}}</td>
                                         <td>
                                             @if($item->status)
-                                                <a data-id="{{$item->id}}" href="javascript:void(0)" class="btn btn-primary changeStatus">Aktif </a>
+                                                <a data-id="{{$item->id}}" href="{{route('admin.education-changeStatus' ,  ['id' => $item->id])}}" class="btn btn-success changeStatus">Aktif </a>
                                             @else
-                                                <a data-id="{{$item->id}}" href="javascript:void(0)" class="btn btn-danger changeStatus">Pasif</a>
+                                                <a data-id="{{$item->id}}" href="{{route('admin.education-changeStatus',  ['id' => $item->id])}}" class="btn btn-danger changeStatus">Pasif</a>
                                             @endif
                                         </td>
-                                        <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}}</td>
-                                        <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}}</td>
+                                        <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
+                                        <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
                                     </tr>
                                 @endforeach
 
@@ -73,114 +73,66 @@
 @endsection
 @section('js')
     <script>
+        $(document).ready(function () {
+            $('.changeStatus').click(function (e) {
+                e.preventDefault();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr("content")
-            }
-        });
+                var itemId = $(this).data('id');
+                var url = '{{ route("admin.education-changeStatus", ":id") }}';
+                url = url.replace(':id', itemId);
 
-        $('.changeStatus').click(function ()
-        {
-            // let educationID = $(this).data('id');
-            let educationID = $(this).attr('data-id');
-            let self = $(this);
-            $.ajax({
-                url: "{{ route('admin.education-changeStatus') }}",
-                // method: "POST"
-                type: "POST",
-                async: false,
-                data: {
-                    educationID: educationID
-                },
-                success: function (response)
-                {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Başarılı !',
-                        text: response.educationID + " ID'li kayıt durumu " + response.newStatus + " olarak güncellenmiştir.",
-                        confirmButtonText: "Tamam"
-                    });
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            var statusText = data.status ? 'Aktif' : 'Pasif';
+                            var buttonColor = data.status ? 'success' : 'danger';
 
-
-                    if (response.status == 1)
-                    {
-                        self[0].innerHTML = "Aktif";
-                        self.removeClass("btn-danger");
-                        self.addClass("btn-success");
-                    }
-                    else if (response.status == 0)
-                    {
-                        self[0].innerHTML = "Pasif";
-                        self.removeClass("btn-success");
-                        self.addClass("btn-danger");
-                    }
-
-                },
-                error: function ()
-                {
-
-                }
-            });
-            // }).done(function ()
-            // {
-            //
-            // }).fail(function ()
-            // {
-            //
-            // });
-
-        });
-
-
-        $('.deleteEducation').click(function ()
-        {
-            let educationID = $(this).attr('data-id');
-
-            Swal.fire({
-                title: "Emin misiniz?",
-                text: educationID + " ID'li eğitim bilgisini silmek istediğinize emin misiniz? ",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Evet',
-                cancelButtonText: 'Hayır'
-            }).then((result) =>
-            {
-                if (result.isConfirmed)
-                {
-                    $.ajax({
-                        url: "{{ route('admin.education-delete') }}",
-                        // method: "POST"
-                        type: "POST",
-                        async: false,
-                        data: {
-                            educationID: educationID
-                        },
-                        success: function (response)
-                        {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Başarılı !',
-                                text: "Silme işlemi başarılı.",
-                                confirmButtonText: "Tamam"
+                                title: 'Başarılı!',
+                                text: data.educationID + " ID'li kayıt durumu " + statusText + " olarak güncellenmiştir.",
+                                confirmButtonText: "Tamam",
+                                customClass: {
+                                    confirmButton: 'btn btn-' + buttonColor
+                                }
                             });
-                            $("tr#" + educationID).remove();
 
-                        },
-                        error: function ()
-                        {
-
+                            if (data.status) {
+                                $('.changeStatus[data-id="' + itemId + '"]').text('Aktif').removeClass('btn-danger').addClass('btn-success');
+                            } else {
+                                $('.changeStatus[data-id="' + itemId + '"]').text('Pasif').removeClass('btn-success').addClass('btn-danger');
+                            }
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Hata!',
+                                text: 'Bir hata oluştu.',
+                                confirmButtonText: "Tamam",
+                                customClass: {
+                                    confirmButton: 'btn btn-danger'
+                                }
+                            });
                         }
-                    });
-                }
-            })
-
-
-
-
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata!',
+                            text: 'İstek gönderilirken bir hata oluştu.',
+                            confirmButtonText: "Tamam",
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            }
+                        });
+                    }
+                });
+            });
         });
-
     </script>
+
 @endsection

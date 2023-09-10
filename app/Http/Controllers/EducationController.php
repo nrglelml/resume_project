@@ -33,13 +33,15 @@ class EducationController extends Controller
 
       return redirect()->route('admin.education-list');
 }
-   public function changeStatus(Request $request){
-      $id =$request->educationID;
-      dd($id);
+   public function changeStatus($id){
+       $item = Education::find($id);
 
-   }
+       if (!$item) {
+           return abort(404);
+       }
 
-   public function delete(Request $request){
+       $item->update(['status' => !$item->status]); // Durumu tersine çevir
 
+       return redirect()->back()->with('success', 'Öğe durumu güncellendi.');
    }
 }
