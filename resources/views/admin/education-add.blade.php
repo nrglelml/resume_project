@@ -1,12 +1,22 @@
 @extends('layouts.admin')
+
+@php
+if ($education){
+    $educationText="Eğitim Bilgilerini Düzenleme";
+    }
+    else{
+        $educationText="Yeni Eğitim Bilgisi Ekle";
+}
+@endphp
+
 @section('title')
-    Yeni Eğitim Bilgisi Ekle
+    {{$educationText}}
 @endsection
 @section('content')
 
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Yeni Eğitim Bilgisi Ekleme </h3>
+            <h3 class="page-title"> {{$educationText}} </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Admin Paneli</a></li>
@@ -21,9 +31,12 @@
                     <div class="card-body">
                         <form class="forms-sample" action="" method="POST" id="createEducationForm">
                             @csrf
+                            @if($education)
+                                <input type="hidden" name="educationID" value="{{$education->id}}">
+                            @endif
                             <div class="form-group">
                                 <label for="ed_date">Eğitim Tarihi</label>
-                                <input type="text" class="form-control"name="ed_date" id="ed_date"  placeholder="Eğitim Tarihi">
+                                <input type="text" class="form-control"name="ed_date" id="ed_date"  placeholder="Eğitim Tarihi" value="{{ $education ? $education->ed_date : '' }}">
                                 <small>Örneğin 2015 - 2020</small>
                                 @error('ed_date')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -31,26 +44,44 @@
                             </div>
                             <div class="form-group">
                                 <label for="university">Üniversite</label>
-                                <input type="text" class="form-control" name="university" id="university" placeholder="Üniversite">
+                                <input type="text" class="form-control" name="university" id="university" placeholder="Üniversite" value="{{ $education ? $education->university : '' }}">
                                 @error('university')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="department">Bölüm</label>
-                                <input type="text" class="form-control"  name="department" id="department" placeholder="Bölüm">
+                                <input type="text" class="form-control"  name="department" id="department" placeholder="Bölüm" value="{{ $education ? $education->department : '' }}">
                                 @error('department')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Açıklama</label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Açıklama">
+                                <textarea type="text" class="form-control" name="description" id="description" placeholder="Açıklama" value="{{ $education ? $education->description : '' }}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="order">Görüntülencek Eğitim Sırası</label>
+                                <input type="text" class="form-control" name="order" id="order"
+                                       placeholder="Görüntülencek Eğitim Sırası"
+                                       value="{{ $education ? $education->order : '' }}">
+                                @error('order')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="form-check form-check-success">
                                     <label class="checkbox-button">
-                                        <input type="checkbox" id="status" name="status">
+                                        <?php
+                                            if ($education){
+                                                $checkStatus=$education->status ? "checked" : '';
+                                            }
+                                            else{
+                                                $checkStatus = 0;
+                                            }
+
+                                            ?>
+                                        <input type="checkbox" id="status" name="status" value="{{ $checkStatus }}">
                                         <span class="checkmark"></span>
                                         Eğitim Bilgileri Alanında Gösterilme Durumu
                                     </label>

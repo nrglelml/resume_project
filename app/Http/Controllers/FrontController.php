@@ -2,12 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Education;
+use App\Models\Experience;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     public function home(){
-        return view('pages.home');
+        $educationList = Education::query()
+            ->statusActive()
+            ->select('ed_date','university','department','description')
+            ->orderby('order','ASC')
+            ->get();
+
+        $experienceList = Experience::query()
+            ->statusActive()
+            ->select('date','task_name','company_name','description','status','active')
+            ->orderby('order','ASC')
+            ->get();
+
+        return view('pages.home',compact('educationList','experienceList'));
     }
 
     public function resume(){

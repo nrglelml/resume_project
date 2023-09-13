@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Education extends Model
+class Experience extends Model
 {
     use HasFactory;
-    protected $table='education';
+    protected $table='experiences';
     protected $primaryKey='id';
-    protected $fillable=['ed_date','university','department','description','status','order'];
-
+    protected $fillable=['date','task_name','company_name','description','status','active','order'];
     public function scopeStatusActive($query){
         return $query->where('status',1);
-}
+    }
 }

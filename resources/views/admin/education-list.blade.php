@@ -3,7 +3,6 @@
     Eğitim Bilgileri Listesi
 @endsection
 @section('content')
-    <div class="content-wrapper">
         <div class="page-header">
             <h3 class="page-title">  Eğitim Bilgileri Listesi </h3>
             <nav aria-label="breadcrumb">
@@ -31,20 +30,24 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Gösterilme Sırası</th>
                                     <th>Eğitim Tarihi</th>
                                     <th>Üniversite</th>
                                     <th>Bölüm</th>
                                     <th>Açıklama</th>
-                                    <th>Status</th>
+                                    <th>Durum</th>
                                     <th>Eklenme Tarihi</th>
                                     <th>Güncellenme Tarihi</th>
+                                    <th>Düzenle</th>
+                                    <th>Sil</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($list as $item)
                                     <tr>
-                                        <td>{{$item->id}}</td>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->order }}</td>
                                         <td>{{$item->ed_date}}</td>
                                         <td>{{$item->university}}</td>
                                         <td>{{$item->department}}</td>
@@ -58,6 +61,13 @@
                                         </td>
                                         <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
                                         <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
+                                        <td>
+                                            <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.education-add' , ['educationID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
+                                        </td>
+                                        <td>
+                                            <!--<button data-id="{{$item->id}}" class="btn btn-danger deleteRecord">Sil</button>-->
+                                            <a data-id="{{$item->id}}" href="{{route('admin.education-delete' ,  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord">Sil<i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -69,7 +79,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 @endsection
 @section('js')
     <script>
@@ -134,5 +144,61 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('.deleteRecord').click(function (e) {
+                e.preventDefault();
+
+                var itemId = $(this).data('id');
+                var url = '{{ route("admin.education-delete", ":id") }}';
+                url = url.replace(':id', itemId);
+
+                Swal.fire({
+                    title: 'Emin misiniz?',
+                    text: "Bu kaydı silmek istediğinizden emin misiniz?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet, Sil',
+                    cancelButtonText: 'İptal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: url,
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function (data) {
+                                if (data.success) {
+                                    Swal.fire(
+                                        'Silindi!',
+                                        'Kayıt başarıyla silindi.',
+                                        'success'
+                                    );
+                                    $(e.target).closest('tr').remove();
+                                } else {
+                                    Swal.fire(
+                                        'Hata!',
+                                        'Kayıt silinirken bir hata oluştu.',
+                                        'error'
+                                    );
+                                }
+                            },
+                            error: function () {
+                                Swal.fire(
+                                    'Hata!',
+                                    'İstek gönderilirken bir hata oluştu.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
 
 @endsection
