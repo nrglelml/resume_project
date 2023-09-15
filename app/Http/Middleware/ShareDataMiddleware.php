@@ -18,7 +18,7 @@ class ShareDataMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $personal_info = PersonalInfo::find(4);
+        $personal_info = PersonalInfo::find(1);
         $socialmedia = SocialMedia::where('status', 1)->get();
 
         view()->share('personal_info', $personal_info);

@@ -30,6 +30,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Düzenle</th>
+                                <th>Sil</th>
                                 <th>Gösterilme Sırası</th>
                                 <th>Çalışma Tarihi</th>
                                 <th>Şirket Adı</th>
@@ -39,8 +41,7 @@
                                 <th>Aktiflik</th>
                                 <th>Eklenme Tarihi</th>
                                 <th>Güncellenme Tarihi</th>
-                                <th>Düzenle</th>
-                                <th>Sil</th>
+
 
                             </tr>
                             </thead>
@@ -48,6 +49,13 @@
                             @foreach($list as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
+                                    <td>
+                                        <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.experience-add' , ['experienceID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
+                                    </td>
+                                    <td>
+                                        <a data-id="{{$item->id}}" href="{{route('admin.experience-delete' ,  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord">Sil<i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                    </td>
+
                                     <td>{{$item->order}}</td>
                                     <td>{{$item->date}}</td>
                                     <td>{{$item->company_name}}</td>
@@ -67,12 +75,6 @@
                                         @endif</td>
                                     <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
                                     <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
-                                    <td>
-                                        <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.experience-add' , ['experienceID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
-                                    </td>
-                                    <td>
-                                        <a data-id="{{$item->id}}" href="{{route('admin.experience-delete' ,  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord">Sil<i class="fa fa-trash" aria-hidden="true"></i> </a>
-                                    </td>
                                 </tr>
                             @endforeach
 

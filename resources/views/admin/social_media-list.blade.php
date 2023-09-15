@@ -30,6 +30,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Düzenle</th>
+                                <th>Sil</th>
                                 <th>Gösterilme Sırası</th>
                                 <th>Sosyal Medya Platformu</th>
                                 <th>Link</th>
@@ -37,8 +39,7 @@
                                 <th>Durum</th>
                                 <th>Eklenme Tarihi</th>
                                 <th>Güncellenme Tarihi</th>
-                                <th>Düzenle</th>
-                                <th>Sil</th>
+
 
                             </tr>
                             </thead>
@@ -46,6 +47,12 @@
                             @foreach($list as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
+                                    <td>
+                                        <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.social_media-add' , ['socialmediaID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
+                                    </td>
+                                    <td>
+                                        <a data-id="{{$item->id}}" href="{{route('admin.social_media-delete',  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord"><i class="fa fa-trash" aria-hidden="true"></i> Sil</a>
+                                    </td>
                                     <td>{{ $item->order }}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->link}}</td>
@@ -59,12 +66,7 @@
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
                                     <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
-                                    <td>
-                                        <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.social_media-add' , ['socialmediaID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
-                                    </td>
-                                    <td>
-                                        <a data-id="{{$item->id}}" href="{{route('admin.social_media-delete',  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord"><i class="fa fa-trash" aria-hidden="true"></i> Sil</a>
-                                    </td>
+
                                 </tr>
                             @endforeach
 

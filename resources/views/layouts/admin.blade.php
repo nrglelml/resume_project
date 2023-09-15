@@ -126,6 +126,14 @@
                     <span class="menu-title">Sosyal Medya Bilgileri</span>
                 </a>
             </li>
+            <li class="nav-item menu-items {{ Route::is('portfolio.index') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('portfolio.index') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                    <span class="menu-title">Portfolio Yönetimi</span>
+                </a>
+            </li>
         </ul>
     </nav>
     <!-- partial -->

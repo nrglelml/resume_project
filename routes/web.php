@@ -7,6 +7,7 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\PersonalInfoController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\PortfolioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 Route::middleware('data.share')->group(function(){
     Route::get('/' , [FrontController::class , 'home'])->name('home');
     Route::get('/resume' , [FrontController::class , 'resume'])->name('resume');
-    Route::get('/portfolio' , [FrontController::class , 'portfolio'])->name('portfolio');
+    Route::get('/portfoli' , [FrontController::class , 'portfolio'])->name('portfoli');
     Route::get('/blog' , [FrontController::class , 'blog'])->name('blog');
     Route::get('/contact' , [FrontController::class , 'contact'])->name('contact');
 });
@@ -30,9 +31,7 @@ Route::middleware('data.share')->group(function(){
 Route::get('/login', function (){
     return view('admin.login');
 })->name('login');
-Route::get('/register', function (){
-    return view('admin.register');
-})->name('register');
+
 
 Route::prefix('admin')->group(function (){
    Route::get('/',[AdminController::class , 'index'])->name('admin.index');
@@ -66,3 +65,5 @@ Route::prefix('admin')->group(function (){
     });
 
 });
+
+Route::resource('portfolio','PortfolioController');

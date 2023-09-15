@@ -48,8 +48,6 @@
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary btn-block enter-btn" id="btnlogin">Login</button>
                             </div>
-
-                            <p class="sign-up">Don't have an Account?<a href="{{route('register')}}"> Sign Up</a></p>
                         </form>
                     </div>
                 </div>

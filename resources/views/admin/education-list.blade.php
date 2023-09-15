@@ -30,6 +30,8 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Düzenle</th>
+                                    <th>Sil</th>
                                     <th>Gösterilme Sırası</th>
                                     <th>Eğitim Tarihi</th>
                                     <th>Üniversite</th>
@@ -38,8 +40,7 @@
                                     <th>Durum</th>
                                     <th>Eklenme Tarihi</th>
                                     <th>Güncellenme Tarihi</th>
-                                    <th>Düzenle</th>
-                                    <th>Sil</th>
+
 
                                 </tr>
                                 </thead>
@@ -47,6 +48,13 @@
                                 @foreach($list as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
+                                        <td>
+                                            <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.education-add' , ['educationID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
+                                        </td>
+                                        <td>
+                                            <!--<button data-id="{{$item->id}}" class="btn btn-danger deleteRecord">Sil</button>-->
+                                            <a data-id="{{$item->id}}" href="{{route('admin.education-delete' ,  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord">Sil<i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                        </td>
                                         <td>{{ $item->order }}</td>
                                         <td>{{$item->ed_date}}</td>
                                         <td>{{$item->university}}</td>
@@ -61,13 +69,7 @@
                                         </td>
                                         <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
                                         <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
-                                        <td>
-                                            <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.education-add' , ['educationID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
-                                        </td>
-                                        <td>
-                                            <!--<button data-id="{{$item->id}}" class="btn btn-danger deleteRecord">Sil</button>-->
-                                            <a data-id="{{$item->id}}" href="{{route('admin.education-delete' ,  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord">Sil<i class="fa fa-trash" aria-hidden="true"></i> </a>
-                                        </td>
+
                                     </tr>
                                 @endforeach
 
