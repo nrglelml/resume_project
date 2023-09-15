@@ -21,6 +21,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('assets/sweet-alert/sweetalert2.css')}}"/>
+    @yield('css')
 </head>
 <body>
 <div class="container-scroller">
@@ -109,56 +110,22 @@
                     <span class="menu-title">Deneyim Bilgileri</span>
                 </a>
             </li>
-           <!-- <li class="nav-item menu-items">
-                <a class="nav-link" href="../../pages/tables/basic-table.html">
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{route('admin.personal_info')}}">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-account-heart"></i>
               </span>
-                    <span class="menu-title">Tables</span>
+                    <span class="menu-title">Kişisel Bilgiler</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../../pages/charts/chartjs.html">
+                <a class="nav-link" href="{{route('admin.social_media-list')}}">
               <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
+                <i class="mdi mdi-account-network"></i>
               </span>
-                    <span class="menu-title">Charts</span>
+                    <span class="menu-title">Sosyal Medya Bilgileri</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../../pages/icons/mdi.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-                    <span class="menu-title">Icons</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-                    <span class="menu-title">User Pages</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="auth">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Blank Page </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> 404 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> 500 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register </a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-                    <span class="menu-title">Documentation</span>
-                </a>
-            </li>-->
         </ul>
     </nav>
     <!-- partial -->

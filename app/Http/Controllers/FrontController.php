@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\PersonalInfo;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -20,6 +21,9 @@ class FrontController extends Controller
             ->select('date','task_name','company_name','description','status','active')
             ->orderby('order','ASC')
             ->get();
+       /* $personal_info=PersonalInfo::query()
+            ->selectColumn()
+            ->get();*/
 
         return view('pages.home',compact('educationList','experienceList'));
     }
