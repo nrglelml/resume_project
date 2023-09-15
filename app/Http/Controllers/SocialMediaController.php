@@ -46,28 +46,35 @@ class SocialMediaController extends Controller
         return redirect()->route('admin.social_media-list');
 
     }
-    public function changeStatus(Request $request){
-        $socialmediaID=$request->socialmediaID;
-        $socialmedia=SocialMedia::find($socialmediaID);
-        $status=$socialmedia->status;
-        $socialmedia->status=$status ? 0 : 1;
-        $socialmedia->save();
-        /*return redirect()->route('admin.social_media-list')->with([
+    public function changeStatus($id)
+    {
+        $item = SocialMedia::find($id);
+
+        if (!$item) {
+            return abort(404);
+        }
+
+        $item->update(['status' => !$item->status]);
+        return redirect()->route('admin.social_media-list')->with([
             'success' => true,
             'error' => false,
-        ]);*/
-        return response()->json([
-            'newStatus' => $socialmedia->status == 1 ? "Aktif" : "Pasif",
-            'socialMediaID' => $socialmediaID,
-            'status' => $socialmedia->status
-        ], 200);
-
+        ]);
     }
-    public function delete(Request $request){
-        $socialmediaID=$request->socialmediaID;
-        SocialMedia::where('id', $socialmediaID)->delete();
-        alert()->success('Başarılı', "Sosyal Medya hesabınız silindi.")
-            ->showConfirmButton('Tamam', '#3085d6')
-            ->persistent(true, true);
+
+        public function delete($id){
+            $item = SocialMedia::find($id);
+
+            $item->delete();
+
+            alert()->success('Başarılı', "Sosyal Medya hesabınız silindi.")
+                ->showConfirmButton('Tamam', '#3085d6')
+                ->persistent(true, true);
+
+            return redirect()->route('admin.social_media-list')->with([
+                'success' => true,
+                'error' => false,
+            ]);
+
+
     }
 }

@@ -52,9 +52,9 @@
                                     <td>{{$item->icon}}</td>
                                     <td>
                                         @if($item->status)
-                                            <a data-id="{{$item->id}}" href="{{route('admin.social_media-changeStatus')}}" class="btn btn-success changeStatus">Aktif </a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.social_media-changeStatus',  ['id' => $item->id])}}" class="btn btn-success changeStatus">Aktif </a>
                                         @else
-                                            <a data-id="{{$item->id}}" href="{{route('admin.social_media-changeStatus')}}" class="btn btn-danger changeStatus">Pasif</a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.social_media-changeStatus',  ['id' => $item->id])}}" class="btn btn-danger changeStatus">Pasif</a>
                                         @endif
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
@@ -63,8 +63,7 @@
                                         <a data-id="{{$item->id}}" class="btn btn-warning edit" href="{{route('admin.social_media-add' , ['socialmediaID'=>$item->id])}}" >Düzenle<i class="fa fa-edit"></i> </a>
                                     </td>
                                     <td>
-                                        <!--<button data-id="{{$item->id}}" class="btn btn-danger deleteRecord">Sil</button>-->
-                                        <a data-id="{{$item->id}}" href="{{route('admin.social_media-delete')}}"  class="btn btn-danger deleteRecord">Sil<i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                        <a data-id="{{$item->id}}" href="{{route('admin.social_media-delete',  ['id' => $item->id])}}"  class="btn btn-danger deleteRecord"><i class="fa fa-trash" aria-hidden="true"></i> Sil</a>
                                     </td>
                                 </tr>
                             @endforeach

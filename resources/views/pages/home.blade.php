@@ -1,24 +1,20 @@
 @extends('layouts.front')
 @section('title')
-    HOME
+   ANA SAYFA
 @endsection
 @section('content')
     <main>
         <section class="intro-section">
-            <h2 class="section-title">Hello, Daisy Murphy!</h2>
-            <p>I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print
-                media. I enjoy turning complex problems into simple, beautiful and intuitive designs. My job is to
-                build your website so that it is functional and user-friendly but at the same time attractive.
-                Moreover, I add personal touch to your product and make sure that is eye-catching and easy to use.
-                My aim is to bring across your message and identity in the most creative way. I created web design
-                for many famous brand companies.</p>
-            <a href="#!" class="btn btn-primary btn-hire-me">HIRE ME</a>
+            <h2 class="section-title">{{$personal_info->main_title}}</h2>
+            {!! $personal_info->about_text !!}
+            <br>
+            <a href="{{ $personal_info->btn_contact_link ? $personal_info->btn_contact_link : 'javascript:void(0)'  }}" class="btn btn-primary btn-hire-me" >{{ $personal_info->btn_contact_text }}</a>
         </section>
         <section class="resume-section">
             <div class="row">
                 <div class="col-lg-6">
-                    <h6 class="section-subtitle">RESUME</h6>
-                    <h2 class="section-title">EDUCATION</h2>
+                    <h6 class="section-subtitle">{{ $personal_info->small_title_left }}</h6>
+                    <h2 class="section-title">{{ $personal_info->title_left }}</h2>
                     <ul class="time-line">
                         @foreach($educationList as $ed)
                         <li class="time-line-item">
@@ -31,8 +27,8 @@
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <h6 class="section-subtitle">RESUME</h6>
-                    <h2 class="section-title">Experience</h2>
+                    <h6 class="section-subtitle">{{ $personal_info->small_title_right }}</h6>
+                    <h2 class="section-title">{{ $personal_info->title_right }}</h2>
                     <ul class="time-line">
                         @foreach($experienceList as $ex)
                             <li class="time-line-item">

@@ -55,15 +55,15 @@
                                     <td>{{$item->description}}</td>
                                     <td>
                                         @if($item->status)
-                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-changeStatus')}}" class="btn btn-success changeStatus">Aktif </a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-changeStatus',  ['id' => $item->id])}}" class="btn btn-success changeStatus">Aktif </a>
                                         @else
-                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-changeStatus')}}" class="btn btn-danger changeStatus">Pasif</a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-changeStatus',  ['id' => $item->id])}}" class="btn btn-danger changeStatus">Pasif</a>
                                         @endif
                                     </td>
                                     <td>@if($item->status)
-                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus')}}" class="btn btn-success changeStatus">Aktif </a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus',  ['id' => $item->id])}}" class="btn btn-success changeStatus">Aktif </a>
                                         @else
-                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus')}}" class="btn btn-danger changeStatus">Pasif</a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus',  ['id' => $item->id])}}" class="btn btn-danger changeStatus">Pasif</a>
                                         @endif</td>
                                     <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
                                     <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
@@ -101,7 +101,7 @@
             let experienceID = $(this).attr('data-id');
             let self = $(this);
             $.ajax({
-                url: "{{ route('admin.experience-changeStatus') }}",
+                url: "{{ route('admin.experience-changeStatus', ":id") }}",
                 // method: "POST"
                 type: "POST",
                 async: false,
@@ -153,7 +153,7 @@
             let experienceID = $(this).attr('data-id');
             let self = $(this);
             $.ajax({
-                url: "{{ route('admin.experience-activeStatus') }}",
+                url: "{{ route('admin.experience-activeStatus', ":id") }}",
                 // method: "POST"
                 type: "POST",
                 async: false,

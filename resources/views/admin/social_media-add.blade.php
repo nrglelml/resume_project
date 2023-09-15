@@ -103,4 +103,6 @@
     </div>
 
 @endsection
-
+@section('js')
+    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+@endsection

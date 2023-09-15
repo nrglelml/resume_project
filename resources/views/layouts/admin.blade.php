@@ -84,7 +84,7 @@
             <li class="nav-item nav-category">
                 <span class="nav-link">Navigation</span>
             </li>
-            <li class="nav-item menu-items">
+            <li class="nav-item menu-items {{ Route::is('admin.index') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.index')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
@@ -93,7 +93,7 @@
                 </a>
             </li>
 
-            <li class="nav-item menu-items">
+            <li class="nav-item menu-items {{ Route::is('admin.education-list') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.education-list')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-book"></i>
@@ -102,7 +102,7 @@
                 </a>
             </li>
 
-            <li class="nav-item menu-items">
+            <li class="nav-item menu-items {{ Route::is('admin.experience-list') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.experience-list')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
@@ -110,7 +110,7 @@
                     <span class="menu-title">Deneyim Bilgileri</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
+            <li class="nav-item menu-items {{ Route::is('admin.personal_info') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.personal_info')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-account-heart"></i>
@@ -118,7 +118,7 @@
                     <span class="menu-title">Kişisel Bilgiler</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
+            <li class="nav-item menu-items {{ Route::is('admin.social_media-list') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.social_media-list')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-account-network"></i>

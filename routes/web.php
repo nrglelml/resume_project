@@ -18,17 +18,14 @@ use App\Http\Controllers\SocialMediaController;
 |
 */
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+Route::middleware('data.share')->group(function(){
+    Route::get('/' , [FrontController::class , 'home'])->name('home');
+    Route::get('/resume' , [FrontController::class , 'resume'])->name('resume');
+    Route::get('/portfolio' , [FrontController::class , 'portfolio'])->name('portfolio');
+    Route::get('/blog' , [FrontController::class , 'blog'])->name('blog');
+    Route::get('/contact' , [FrontController::class , 'contact'])->name('contact');
+});
 
-Route::get('/' , [FrontController::class , 'home'])->name('home');
-
-
-Route::get('/resume' , [FrontController::class , 'resume'])->name('resume');
-
-Route::get('/portfolio' , [FrontController::class , 'portfolio'])->name('portfolio');
-
-Route::get('/blog' , [FrontController::class , 'blog'])->name('blog');
-
-Route::get('/contact' , [FrontController::class , 'contact'])->name('contact');
 
 Route::get('/login', function (){
     return view('admin.login');
@@ -50,8 +47,8 @@ Route::prefix('admin')->group(function (){
       Route::get('/list',[ExperienceController::class ,'list'])->name('admin.experience-list');
       Route::get('/add',[ExperienceController::class , 'addShow'])->name('admin.experience-add');
       Route::post('/add',[ExperienceController::class,'add']);
-      Route::match(['GET', 'POST'],'/change-status',[ExperienceController::class,'changeStatus'])->name('admin.experience-changeStatus');
-      Route::match(['GET', 'POST'],'/active-status',[ExperienceController::class,'activeStatus'])->name('admin.experience-activeStatus');
+      Route::match(['GET', 'POST'],'/change-status/{id}',[ExperienceController::class,'changeStatus'])->name('admin.experience-changeStatus');
+      Route::match(['GET', 'POST'],'/active-status/{id}',[ExperienceController::class,'activeStatus'])->name('admin.experience-activeStatus');
       Route::match(['GET', 'POST'],'/delete/{id}',[ExperienceController::class,'delete'])->name('admin.experience-delete');
 
   });
@@ -63,8 +60,8 @@ Route::prefix('admin')->group(function (){
         Route::get('/list',[SocialMediaController::class ,'list'])->name('admin.social_media-list');
         Route::get('/add',[SocialMediaController::class , 'addShow'])->name('admin.social_media-add');
         Route::post('/add',[SocialMediaController::class,'add']);
-        Route::match(['GET', 'POST'],'/change-status',[SocialMediaController::class,'changeStatus'])->name('admin.social_media-changeStatus');
-        Route::match(['GET', 'POST'],'/delete',[SocialMediaController::class,'delete'])->name('admin.social_media-delete');
+        Route::match(['GET', 'POST'],'/change-status/{id}',[SocialMediaController::class,'changeStatus'])->name('admin.social_media-changeStatus');
+        Route::match(['GET', 'POST'],'/delete/{id}',[SocialMediaController::class,'delete'])->name('admin.social_media-delete');
 
     });
 

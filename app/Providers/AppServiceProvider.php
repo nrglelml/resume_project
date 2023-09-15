@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\PersonalInfo;
+use App\Models\SocialMedia;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+      //
     }
 }

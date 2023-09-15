@@ -65,8 +65,7 @@ class ExperienceController extends Controller
 
     }
 
-    public function changeStatus(Request $request){
-        $id=$request->experienceID;
+    public function changeStatus($id){
         $item = Experience::find($id);
 
         if (!$item) {
@@ -81,8 +80,7 @@ class ExperienceController extends Controller
 
     }
 
-    public function activeStatus(Request $request){
-        $id=$request->experienceID;
+    public function activeStatus($id){
         $item = Experience::find($id);
 
         if (!$item) {

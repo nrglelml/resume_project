@@ -30,12 +30,15 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="about_text">Hakkımda Yazısı</label>
-                                <textarea type="text" class="form-control" name="about_text" id="about_text" placeholder="Hakkımda Yazısı" value="{{ $info ? $info->about_text : '' }}" ></textarea>
-                                @error('about_text')
+                                <label for="editor1">Hakkımda Yazısı</label><br>
+                                <textarea cols="80" id="editor1" name="about_text" rows="10" data-sample="1"
+                                          data-sample-short="" value="{{ $info ? $info->about_text : '' }}" >
+                            </textarea>
+                                @error('editor1')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label for="btn_contact_text">Bana Ulaşın Butonu Link</label>
                                 <input type="text" class="form-control" name="btn_contact_text" id="btn_contact_text"

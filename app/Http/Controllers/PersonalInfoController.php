@@ -29,6 +29,10 @@ class PersonalInfoController extends Controller
                 'title_left.required' => 'Lütfen eğitim listesinin başlığını yazın.',
                 'title_right.required' => 'Lütfen deneyim listesinin başlığını yazın'
             ]);
+        $info = PersonalInfo::find(1);
+        if ($info) {
+            $info->delete();
+        }
 
         $info = new PersonalInfo;
         if ($request->file('cv')){
