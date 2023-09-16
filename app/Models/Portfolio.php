@@ -9,4 +9,8 @@ class Portfolio extends Model
 {
     use HasFactory;
     protected $guarded=[];
+    public function featuredImage(){
+        return $this->hasOne('App\Models\PortfolioImage','portfolio_id','id')
+            ->where('featured',1);
+    }
 }

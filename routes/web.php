@@ -67,3 +67,5 @@ Route::prefix('admin')->group(function (){
 });
 
 Route::resource('portfolio','PortfolioController');
+Route::post('/portfolio/change-status/', [PortfolioController::class,'changeStatus'])->name('portfolio.changeStatus');
+

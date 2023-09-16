@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-   Portfolio Yönetimi
+    Portfolio Yönetimi
 @endsection
 @section('css')
 @endsection
@@ -19,15 +19,28 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <form class="forms-sample" action="{{route('portfolio.store')}}" method="POST" id="portfolioForm" enctype="multipart/form-data">
+                        <form class="forms-sample" id="portfolioForm" method="POST"
+                              action="{{ isset($portfolio) ? route('portfolio.update', ['portfolio' => request('portfolio')]) : route('portfolio.store') }}"
+                              enctype="multipart/form-data">
                             @csrf
+                            @isset($portfolio)
+                                @method('PUT')
+                            @endisset
                             <div class="form-group">
                                 <label for="title">Başlık</label>
-                                <input type="text" class="form-control"name="title" id="title"  placeholder="Başlık">
+                                <input type="text" class="form-control"name="title" id="title"  placeholder="Başlık"
+                                       value="{{ $portfolio ? $portfolio->title : '' }}" >
+                                @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="tags">Etiketler</label>
-                                <input type="text" class="form-control"name="tags" id="tags"  placeholder="Etiketler">
+                                <input type="text" class="form-control"name="tags" id="tags"  placeholder="Etiketler"
+                                       value="{{ $portfolio ? $portfolio->tags : '' }}" >
+                                @error('tags')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="about">Portfolio Hakkında</label><br>
@@ -37,41 +50,61 @@
                             </div>
                             <div class="form-group">
                                 <label for="website">Websitesi</label>
-                                <input type="text" class="form-control"name="website" id="website"  placeholder="Websitesi">
+                                <input type="text" class="form-control"name="website" id="website"  placeholder="Websitesi"
+                                       value="{{ $portfolio ? $portfolio->website : '' }}" >
+                                @error('website')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="keywords">Keywords</label>
-                                <input type="text" class="form-control"name="keywords" id="keywords"  placeholder="Keywords">
+                                <input type="text" class="form-control"name="keywords" id="keywords"  placeholder="Keywords"
+                                       value="{{ $portfolio ? $portfolio->keywords : '' }}" >
+                                @error('keywords')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <input type="text" class="form-control" name="description" id="description"
-                                       placeholder="Description">
+                                       placeholder="Description"
+                                       value="{{ $portfolio ? $portfolio->description : '' }}">
+                                @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="images">
-                                    Portfolio Görselleri
-                                </label><br>
-                                <input type="file" multiple name="images" id="images">
-                            </div>
+                            @isset($portfolio)
+                            @else
+                                <div class="form-group">
+                                    <label for="images">
+                                        Portfolio Görselleri
+                                    </label><br>
+                                    <input type="file" multiple name="images[]" id="images">
+                                    @if($errors->has('images.*'))
+                                        @foreach($errors->get('images.*') as $key => $value)
+                                            <div class="alert alert-danger"> {{$errors->first($key)}}</div>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                            @endisset
                             <div class="form-group">
                                 <div class="form-check form-check-success">
                                     <label class="checkbox-button">
-                                        <input type="checkbox" id="status" name="status" >
+                                        <input type="checkbox" id="status" name="status">
                                         <span class="checkmark"></span>
                                         Portfolio Alanında Gösterilme Durumu
                                     </label>
 
                                 </div>
 
-                            <button type="submit" class="btn btn-primary mr-2" id="createButton">Kaydet</button>
+                                <button type="submit" class="btn btn-primary mr-2" id="createButton">Kaydet</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
         @endsection
 
         @section('js')
