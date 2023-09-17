@@ -63,7 +63,7 @@
                                            class="btn btn-danger deleteEducation">Sil <i class="fa fa-trash"></i></a>
                                     </td>
                                     <td>
-                                        <a href="">
+                                        <a href="{{route('portfolio.showImages',['id'=>$item->id])}}">
                                             <img
                                                 src="{{ $item->featuredImage ? asset('storage/portfolio/' . $item->featuredImage->image) : '-' }}"
                                                 width="150">

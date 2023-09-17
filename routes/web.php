@@ -68,4 +68,8 @@ Route::prefix('admin')->group(function (){
 
 Route::resource('portfolio','PortfolioController');
 Route::post('/portfolio/change-status/', [PortfolioController::class,'changeStatus'])->name('portfolio.changeStatus');
-
+Route::get('/portfolio/images/{id}',[PortfolioController::class,'showImages'])->name('portfolio.showImages')->whereNumber('id');
+Route::post('/portfolio/images/{id}',[PortfolioController::class,'newImage'])->name('portfolio.newImage')->whereNumber('id');
+Route::delete('/portfolio/images/{id}',[PortfolioController::class,'deleteImage'])->name('portfolio.deleteImage')->whereNumber('id');
+Route::put('/portfolio/images/{id}',[PortfolioController::class,'featureImage'])->name('portfolio.featureImage')->whereNumber('id');
+Route::post('/portfolio/images',[PortfolioController::class,'changeStatusImage'])->name('portfolio.changeStatusImage')->whereNumber('id');

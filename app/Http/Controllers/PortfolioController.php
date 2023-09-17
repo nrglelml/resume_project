@@ -8,6 +8,8 @@ use App\Models\Portfolio;
 use App\Http\Requests\PortfolioRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mockery\Exception;
+
 
 
 class PortfolioController extends Controller
@@ -72,6 +74,74 @@ class PortfolioController extends Controller
 
     }
 
+    public function showImages(Request $request, $id){
+        $images=PortfolioImage::where('portfolio_id',$id)->get();
+        return view('admin.portfolio_list_images',compact('images'));
+    }
+
+    public function newImage(Request $request,$id){
+        if($request->file('images')){
+            $now = now()->format('YmdHis');
+            foreach ($request->file('images') as $image){
+                $extension=$image->getClientOriginalExtension();
+                $name=$image->getClientOriginalName();
+                $slugName = Str::slug($name[0], '-') . '_' . $now . '.' . $extension;
+                $publicPath='public/';
+                $path='portfolio/';
+                Storage::putFileAs($publicPath .$path, $image , $slugName);
+
+                PortfolioImage::create([
+                    'portfolio_id' => $id,
+                    'image' => $slugName,
+                    'featured' => 0,
+                    'status' => 1,
+                ]);
+            }
+        }
+        alert()->success('Başarılı', 'Portfolio resim eklendi.')
+            ->showConfirmButton('Tamam', '#3085d6')
+            ->persistent(true, true);
+        return redirect()->back();
+    }
+
+    public function deleteImage(Request $request,$id){
+
+        try {
+            $image=PortfolioImage::find($id);
+            if ($image){
+                if (file_exists('/storage/portfolio'.$image->image)){
+                    unlink('/storage/portfolio'.$image->image);
+                }
+                $image->delete();
+            }
+        }catch (Exception $exception){
+            return response()->json(['errorMessage' => $exception->getMessage()], 500);
+        }
+    }
+
+    public function featureImage(Request $request, $id)
+    {
+        try
+        {
+            $image = PortfolioImage::find($id);
+            if ($image)
+            {
+                PortfolioImage::where('portfolio_id', $image->portfolio_id)
+                    ->update([
+                        'featured' => 0
+                    ]);
+                $image->featured = 1;
+                $image->save();
+            }
+        }
+        catch (Exception $exception)
+        {
+            return response()->json(['errorMessage' => $exception->getMessage()], 500);
+        }
+
+        return response()->json(['success' => true], 200);
+    }
+
 
 
     public function edit($id)
@@ -116,11 +186,11 @@ class PortfolioController extends Controller
     }
 
     public function changeStatus(Request $request)
-    {//kopyalandığı için education olarak kaldı
+    {
         $id = $request->id;
         $newStatus = null;
-        $findEducation = Portfolio::find($id);
-        if ($findEducation->status)
+        $findPortfolio = Portfolio::find($id);
+        if ($findPortfolio->status)
         {
             $status = 0;
             $newStatus = "Pasif";
@@ -131,8 +201,8 @@ class PortfolioController extends Controller
             $newStatus = "Aktif";
         }
 
-        $findEducation->status = $status;
-        $findEducation->save();
+        $findPortfolio->status = $status;
+        $findPortfolio->save();
 
         return response()->json([
             'newStatus' => $newStatus,
@@ -140,4 +210,31 @@ class PortfolioController extends Controller
             'status' => $status
         ], 200);
     }
+    public function changeStatusImage(Request $request)
+    {
+        $id = $request->id;
+        $newStatus = null;
+        $findImage = PortfolioImage::find($id);
+        if ($findImage->status)
+        {
+            $status = 0;
+            $newStatus = "Pasif";
+        }
+        else
+        {
+            $status = 1;
+            $newStatus = "Aktif";
+        }
+
+        $findImage->status = $status;
+        $findImage->save();
+
+        return response()->json([
+            'newStatus' => $newStatus,
+            'id' => $id,
+            'status' => $status
+        ], 200);
+    }
+
+
 }
