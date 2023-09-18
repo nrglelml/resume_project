@@ -7,11 +7,12 @@
     <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,500,600,700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/vendors/@fortawesome/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/live-resume.css')}}">
-    <style type="text/css" id="operaUserStyle"></style></head>
-
+    <style type="text/css" id="operaUserStyle"></style>
+    @yield('css')
+</head>
 <body>
 <header>
-    <button class="btn btn-white btn-share ml-auto mr-3 ml-md-0 mr-md-auto"><img src="assets/images/share.svg" alt="share" class="btn-img">
+    <button class="btn btn-white btn-share ml-auto mr-3 ml-md-0 mr-md-auto"><img src="{{asset('assets/images/share.svg')}}" alt="share" class="btn-img">
         SHARE</button>
     <nav class="collapsible-nav show" id="collapsible-nav">
         <a href="{{route('home')}}" class="nav-link {{Route::is('home') ?  "active" : ""}} ">HOME</a>
@@ -20,11 +21,11 @@
         <a href="{{route('blog')}}" class="nav-link {{Route::is('blog') ?  "active" : ""}}">BLOG</a>
         <a href="{{route('contact')}}" class="nav-link {{Route::is('contact') ?  "active" : ""}}">CONTACT</a>
     </nav>
-    <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav" data-target="collapsible-nav"><img src="assets/images/hamburger.svg" alt="hamburger"></button>
+    <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav" data-target="collapsible-nav"><img src="{{asset('assets/images/hamburger.svg')}}" ></button>
 </header>
 <div class="content-wrapper">
     <aside>
-        <div class="profile-img-wrapper">
+        <div class="profile-img-wrapper padding-1-12">
             <img src="{{ asset('storage/'.$personal_info->image) }}" alt={{$personal_info->full_name}}>
         </div>
         <h1 class="profile-name">{{$personal_info->full_name}}</h1>
@@ -76,6 +77,6 @@
 <script src="{{asset('assets/vendors/@popperjs/core/sweet-alert/umd/popper-base.min.js')}}"></script>
 <script src="{{asset('assets/vendors/bootstrap/sweet-alert/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/live-resume.js')}}"></script>
-
+@yield('js')
 
 </body></html>

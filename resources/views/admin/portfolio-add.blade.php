@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="about">Portfolio Hakkında</label><br>
                                 <textarea cols="80" id="about" name="about" rows="10"
-                                          data-sample-short="" >
+                                          data-sample-short="" >{!! $portfolio->about ?? '' !!}
                             </textarea>
                             </div>
                             <div class="form-group">
@@ -98,7 +98,8 @@
 
                                 </div>
 
-                                <button type="submit" class="btn btn-primary mr-2" id="createButton">Kaydet</button>
+                                <button type="button" class="btn btn-primary mr-2"
+                                        id="createButton">{{ isset($portfolio) ? 'Güncelle' : 'Kaydet' }}</button>
                             </div>
                         </form>
                     </div>

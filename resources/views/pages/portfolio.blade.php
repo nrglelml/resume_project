@@ -8,13 +8,20 @@
             <h2 class="section-title">PORTFOLIO</h2>
 
             <div class="portfolio-wrapper">
+                @foreach($portfolio as $item)
                 <figure class="portfolio-item hover-box out-undefined out-up" style="perspective: 1017.6px;">
-                    <img src="assets/images/img_1.png" alt="project" class="portfolio-item-img">
+                    <a href="{{route('portfolio.detail',['id'=>$item->id])}}">
+                    <img src="{{asset('storage/portfolio/'.$item->featuredImage->image)}}"
+                         alt="{{$item->title}}"
+                         class="portfolio-item-img">
+                    </a>
                     <figcaption class="portfolio-item-details overlay">
-                        <h5 class="portfolio-item-title">PROJECT 01</h5>
-                        <p class="portfolio-item-description">Branding, Photography</p>
+                        <h3 class="portfolio-item-title">{{$item->title}}</h3>
+                        <p class="portfolio-item-description">{{$item->description}}</p>
+                        <h5 class="portfolio-item-website">{{$item->website}}</h5>
                     </figcaption>
                 </figure>
+                @endforeach
                 <figure class="portfolio-item hover-box out-down" style="perspective: 1017.6px;">
                     <img src="assets/images/img_2.png" alt="project" class="portfolio-item-img">
                     <figcaption class="portfolio-item-details overlay">
@@ -67,8 +74,6 @@
             </div>
 
         </section>
-        <footer>Live Resume @ <a href="https://www.bootstrapdash.com" target="_blank" rel="noopener noreferrer">BootstrapDash</a>.
-            All Rights Reserved 2020
-        </footer>
+
     </main>
 @endsection
