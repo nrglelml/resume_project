@@ -107,14 +107,14 @@
 
         $('.changeStatus').click(function ()
         {
-            let educationID = $(this).attr('data-id');
+            let portfolioID = $(this).attr('data-id');
             let self = $(this);
             $.ajax({
                 url: "{{ route('portfolio.changeStatus')}}" ,
                 type: "POST",
                 async: false,
                 data: {
-                    id: educationID
+                    id: portfolioID
                 },
                 success: function (response)
                 {
@@ -158,11 +158,11 @@
 
         $('.deleteEducation').click(function ()
         {
-            let educationID = $(this).attr('data-id');
+            let portfolioID = $(this).attr('data-id');
 
             Swal.fire({
                 title: "Emin misiniz?",
-                text: educationID + " ID'li portfolio bilgisini silmek istediğinize emin misiniz? ",
+                text: portfolioID + " ID'li portfolio bilgisini silmek istediğinize emin misiniz? ",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -174,14 +174,14 @@
                 if (result.isConfirmed)
                 {
                     let route = '{{ route('portfolio.destroy', ['portfolio' => 'deletePortfolio']) }}';
-                    let finalRoute = route.replace('deletePortfolio', educationID);
+                    let finalRoute = route.replace('deletePortfolio', portfolioID);
                     $.ajax({
                         url: finalRoute,
                         // method: "POST"
                         type: "POST",
                         async: false,
                         data: {
-                            portfolio: educationID,
+                            portfolio: portfolioID,
                             '_method': 'DELETE'
                         },
                         success: function (response)
@@ -192,7 +192,7 @@
                                 text: "Silme işlemi başarılı.",
                                 confirmButtonText: "Tamam"
                             });
-                            $("tr#" + educationID).remove();
+                            $("tr#" + portfolioID).remove();
 
                         },
                         error: function ()

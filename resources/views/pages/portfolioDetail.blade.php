@@ -33,7 +33,7 @@ PORTFOLİO
     </main>
 @endsection
 @section('js')
-    <script src="{{asset('jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('asset/js/jquery.magnific-popup.min.js')}}"></script>
     <script>
         $(document).ready(function ()
         {

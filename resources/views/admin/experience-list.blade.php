@@ -68,10 +68,10 @@
                                             <a data-id="{{$item->id}}" href="{{route('admin.experience-changeStatus',  ['id' => $item->id])}}" class="btn btn-danger changeStatus">Pasif</a>
                                         @endif
                                     </td>
-                                    <td>@if($item->status)
-                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus',  ['id' => $item->id])}}" class="btn btn-success changeStatus">Aktif </a>
+                                    <td>@if($item->active)
+                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus',  ['id' => $item->id])}}" class="btn btn-success activeStatus">Aktif </a>
                                         @else
-                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus',  ['id' => $item->id])}}" class="btn btn-danger changeStatus">Pasif</a>
+                                            <a data-id="{{$item->id}}" href="{{route('admin.experience-activeStatus',  ['id' => $item->id])}}" class="btn btn-danger activeStatus">Pasif</a>
                                         @endif</td>
                                     <td>{{\Carbon\Carbon::parse($item->created_at)->format("d-m-Y H:i:s")}}</td>
                                     <td>{{\Carbon\Carbon::parse($item->updated_at)->format("d-m-Y H:i:s")}}</td>
@@ -89,7 +89,7 @@
 
 @endsection
 @section('js')
-    <script>
+    <!--<script>
 
         $.ajaxSetup({
             headers: {
@@ -244,5 +244,5 @@
 
         });
 
-    </script>
+    </script>-->
 @endsection

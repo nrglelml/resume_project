@@ -8,7 +8,7 @@
             <h2 class="section-title">{{$personal_info->main_title}}</h2>
             {!! $personal_info->about_text !!}
             <br>
-            <a href="{{ $personal_info->btn_contact_link ? $personal_info->btn_contact_link : 'javascript:void(0)'  }}" class="btn btn-primary btn-hire-me" >{{ $personal_info->btn_contact_text }}</a>
+            <a href="{{ route('contact')}}" class="btn btn-primary btn-hire-me" >{{ $personal_info->btn_contact_text }}</a>
         </section>
         <section class="resume-section">
             <div class="row">

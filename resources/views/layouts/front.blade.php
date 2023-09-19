@@ -20,8 +20,8 @@
         <a href="{{route('resume')}}" class="nav-link {{Route::is('resume') ?  "active" : ""}}" >RESUME</a>
         <a href="{{route('portfoli')}}" class="nav-link {{Route::is('portfoli') ?  "active" : ""}}">PORTFOLIO</a>
         <a href="{{route('contact')}}" class="nav-link {{Route::is('contact') ?  "active" : ""}}">CONTACT</a>
-        <a href="{{route('admin.index')}}" class="nav-link {{Route::is('admin.index') ?  "active" : ""}}">ADMİN PANELİ</a>
-        <a href="{{route('blog')}}" class="nav-link {{Route::is('blog') ?  "active" : ""}}">BLOG</a>
+        <a href="{{route('admin.index')}}" target="_blank" class="nav-link {{Route::is('admin.index') ?  "active" : ""}}">ADMİN PANELİ</a>
+
 
 
     </nav>

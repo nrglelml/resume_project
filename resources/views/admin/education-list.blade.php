@@ -84,7 +84,7 @@
 
 @endsection
 @section('js')
-    <script>
+    <<!--<script>
         $(document).ready(function () {
             $('.changeStatus').click(function (e) {
                 e.preventDefault();
@@ -145,7 +145,7 @@
                 });
             });
         });
-    </script>
+    </script>-->
     <script>
         $(document).ready(function () {
             $('.deleteRecord').click(function (e) {

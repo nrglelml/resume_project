@@ -87,7 +87,7 @@ class ExperienceController extends Controller
             return abort(404);
         }
 
-        $item->update(['active' => !$item->status]);
+        $item->update(['active' => !$item->active]);
         return redirect()->route('admin.experience-list')->with([
             'success' => true,
             'error' => false,

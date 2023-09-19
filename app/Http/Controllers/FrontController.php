@@ -23,14 +23,22 @@ class FrontController extends Controller
             ->select('date','task_name','company_name','description','status','active')
             ->orderby('order','ASC')
             ->get();
-
-
-
         return view('pages.home',compact('educationList','experienceList'));
     }
 
     public function resume(){
-        return view('pages.resume');
+        $educationList = Education::query()
+            ->statusActive()
+            ->select('ed_date','university','department','description')
+            ->orderby('order','ASC')
+            ->get();
+
+        $experienceList = Experience::query()
+            ->statusActive()
+            ->select('date','task_name','company_name','description','status','active')
+            ->orderby('order','ASC')
+            ->get();
+        return view('pages.resume',compact('educationList','experienceList'));
     }
 
     public function portfolio(){
@@ -52,11 +60,5 @@ class FrontController extends Controller
         return view('pages.portfolioDetail',compact('portfolio'));
     }
 
-    public function blog(){
-        return view('pages.blog');
-    }
 
-    public function contact(){
-        return view('pages.contact');
-    }
 }
