@@ -18,7 +18,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('assets/sweet-alert/sweetalert2.css')}}"/>
-
+    {!! htmlScriptTagJsApi() !!}
 </head>
 <body>
 <div class="container-scroller">
@@ -37,6 +37,9 @@
                             <div class="form-group">
                                 <label for="password">Password *</label>
                                 <input type="password" class="form-control p_input" name="password" id="password">
+                            </div>
+                            <div class="form-group">
+                                {!! htmlFormSnippet() !!}
                             </div>
                             <div class="form-group d-flex align-items-center justify-content-between">
                                 <div class="form-check">

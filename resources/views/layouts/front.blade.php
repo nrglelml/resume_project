@@ -12,16 +12,21 @@
 </head>
 <body>
 <header>
-    <button class="btn btn-white btn-share ml-auto mr-3 ml-md-0 mr-md-auto"><img src="{{asset('assets/images/share.svg')}}" alt="share" class="btn-img">
+    <button class="btn btn-white btn-share ml-auto mr-3 ml-md-0 mr-md-auto">
+        <img src="{{asset('assets/images/share.svg')}}" alt="share" class="btn-img">
         SHARE</button>
     <nav class="collapsible-nav show" id="collapsible-nav">
         <a href="{{route('home')}}" class="nav-link {{Route::is('home') ?  "active" : ""}} ">HOME</a>
         <a href="{{route('resume')}}" class="nav-link {{Route::is('resume') ?  "active" : ""}}" >RESUME</a>
         <a href="{{route('portfoli')}}" class="nav-link {{Route::is('portfoli') ?  "active" : ""}}">PORTFOLIO</a>
-        <a href="{{route('blog')}}" class="nav-link {{Route::is('blog') ?  "active" : ""}}">BLOG</a>
         <a href="{{route('contact')}}" class="nav-link {{Route::is('contact') ?  "active" : ""}}">CONTACT</a>
+        <a href="{{route('admin.index')}}" class="nav-link {{Route::is('admin.index') ?  "active" : ""}}">ADMİN PANELİ</a>
+        <a href="{{route('blog')}}" class="nav-link {{Route::is('blog') ?  "active" : ""}}">BLOG</a>
+
+
     </nav>
-    <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav" data-target="collapsible-nav"><img src="{{asset('assets/images/hamburger.svg')}}" ></button>
+    <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav" data-target="collapsible-nav">
+        <img src="{{asset('assets/images/hamburger.svg')}}" ></button>
 </header>
 <div class="content-wrapper">
     <aside>

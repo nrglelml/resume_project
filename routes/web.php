@@ -8,6 +8,8 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\PersonalInfoController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\PortfolioController;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +34,9 @@ Route::middleware('data.share')->group(function(){
 Route::get('/login', function (){
     return view('admin.login');
 })->name('login');
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
+
 
 
 Route::prefix('admin')->middleware('auth')->group(function (){

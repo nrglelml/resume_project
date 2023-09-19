@@ -319,8 +319,19 @@
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject mb-1">Log out</p>
-                                </div>
+                                    <form id="logout-form-profile" action="{{ route('login') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                             document.getElementById('logout-form-logout').submit();">
+                                        <p class="preview-subject mb-1"> {{ __('Çıkış Yap') }}</p>
+
+                                    </a>
+                                    <form id="logout-form-logout" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                        </div>
                             </a>
                             <div class="dropdown-divider"></div>
                             <p class="p-3 mb-0 text-center">Advanced settings</p>
